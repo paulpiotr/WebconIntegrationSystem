@@ -1,4 +1,4 @@
-﻿using MvvmCross.ViewModels;
+using MvvmCross.ViewModels;
 using NetAppCommon;
 using Newtonsoft.Json;
 using System;
@@ -17,7 +17,7 @@ namespace WebconIntegrationSystem.Models.BPSMainAtt
     /// The settings model class of the ErpSerwis.Core.Models
     /// </summary>
     [NotMapped]
-    public partial class AppSettings : MvxViewModel, INotifyPropertyChanged
+    public partial class AppSettings : INotifyPropertyChanged
     {
         #region private static readonly log4net.ILog log4net
         /// <summary>
@@ -192,7 +192,7 @@ namespace WebconIntegrationSystem.Models.BPSMainAtt
         /// <summary>
         /// PropertyChangedEventHandler PropertyChanged
         /// </summary>
-        public new event PropertyChangedEventHandler PropertyChanged;
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         #region protected virtual void OnPropertyChanged(PropertyChangedEventArgs args)
