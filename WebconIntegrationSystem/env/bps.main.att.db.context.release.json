@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "BPSMainAttDbContext": "Server=Nazwa Serwera; Database=Nazwa Bazy Danych; MultipleActiveResultSets=true; User Id=Nazwa Uzytkownika; Password=Haslo Uzytkownika; Max Pool Size=65536; Pooling=True;"
+  }
+}

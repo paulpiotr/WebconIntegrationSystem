@@ -1,10 +1,7 @@
-﻿using NetAppCommon;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
-using WebconIntegrationSystem.Data.BPSMainAttDbContext;
+using NetAppCommon;
 using WebconIntegrationSystem.Models.BPSMainAtt;
 using WebconIntegrationSystem.Repositories.BPSMainAtt.Interface;
 

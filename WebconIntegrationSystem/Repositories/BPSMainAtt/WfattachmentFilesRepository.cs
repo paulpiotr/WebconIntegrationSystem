@@ -1,12 +1,12 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Reflection;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using WebconIntegrationSystem.Data.BPSMainAttDbContext;
 using WebconIntegrationSystem.Models.BPSMainAtt;
 using WebconIntegrationSystem.Repositories.BPSMainAtt.Interface;
-using WebconIntegrationSystem.Data.BPSMainAttDbContext;
-using System.Reflection;
-using System.ComponentModel;
-using Microsoft.EntityFrameworkCore;
 
 namespace WebconIntegrationSystem.Repositories.BPSMainAtt
 {
@@ -47,7 +47,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
         /// Log4net Logger
         /// Log4net Logger
         /// </summary>
-        private log4net.ILog _log4net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly log4net.ILog _log4net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod().DeclaringType);
         #endregion
 
         #region private readonly BPSMainAttDbContext _context

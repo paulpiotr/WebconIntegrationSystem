@@ -1,6 +1,3 @@
-using MvvmCross.ViewModels;
-using NetAppCommon;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +5,8 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using System.Reflection;
+using NetAppCommon;
+using Newtonsoft.Json;
 
 namespace WebconIntegrationSystem.Models.BPSMainAtt
 {
@@ -31,11 +30,7 @@ namespace WebconIntegrationSystem.Models.BPSMainAtt
         /// Nazwa pliku z ustawieniami aplikacji ustawiona w zależności od wersji środowiska
         /// Application settings file name set depending on the version of the environment
         /// </summary>
-#if DEBUG
-        private static readonly string FileName = "bps.main.att.db.context.debug.json";
-#else
-        private static readonly string FileName = "bps.main.att.db.context.release.json";
-#endif
+        private static readonly string FileName = "bps.main.att.db.context.json";
         #endregion
 
         #region private static readonly string FilePath...
@@ -43,13 +38,23 @@ namespace WebconIntegrationSystem.Models.BPSMainAtt
         /// Absolutna ścieżka do pliku konfiguracji
         /// The absolute path to the configuration file
         /// </summary>
-        private static readonly string FilePath = Path.Combine(Configuration.GetBaseDirectory(), FileName);
+        private readonly string _filePath = Path.Combine(Configuration.GetBaseDirectory(), FileName);
         #endregion
 
+        #region public string GetFilePath()
+        /// <summary>
+        /// Pobierz bieżącą ścieżkę do pliku konfiguracji
+        /// Get the current path to the configuration file
+        /// </summary>
+        /// <returns>
+        /// Bieżąca ścieżka do pliku konfiguracji jako string
+        /// Current path to the configuration file as a string
+        /// </returns>
         public string GetFilePath()
         {
-            return FilePath;
+            return _filePath;
         }
+        #endregion
 
         #region private static readonly string ConnectionStringName
         /// <summary>
@@ -83,7 +88,28 @@ namespace WebconIntegrationSystem.Models.BPSMainAtt
         {
             try
             {
-                ConnectionString = Configuration.GetValue<string>(FileName, string.Format("{0}:{1}", "ConnectionStrings", ConnectionStringName)) ?? @"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=%Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)%\ErpSerwisMSSQLLocalDB\ErpSerwisMSSQLLocalDB.mdf; Database=%AttachDbFilename%; MultipleActiveResultSets=true; Integrated Security=True; Trusted_Connection=Yes";
+                var sourceFileName = _filePath;
+                var destFileName = Path.Combine(Configuration.GetUserProfileDirectory(), FileName);
+                if (File.Exists(sourceFileName) && !File.Exists(destFileName))
+                {
+                    if (!Directory.Exists(Path.GetDirectoryName(destFileName)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(destFileName));
+                    }
+                    File.Copy(sourceFileName, destFileName);
+                }
+                if (File.Exists(destFileName))
+                {
+                    _filePath = destFileName;
+                }
+            }
+            catch (Exception e)
+            {
+                Log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
+            }
+            try
+            {
+                ConnectionString = Configuration.GetValue<string>(_filePath, string.Format("{0}:{1}", "ConnectionStrings", ConnectionStringName)) ?? @"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=%Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)%\ErpSerwisMSSQLLocalDB\ErpSerwisMSSQLLocalDB.mdf; Database=%AttachDbFilename%; MultipleActiveResultSets=true; Integrated Security=True; Trusted_Connection=Yes";
             }
             catch (Exception e)
             {
