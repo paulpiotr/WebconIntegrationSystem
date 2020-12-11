@@ -18,7 +18,7 @@ namespace WebconIntegrationSystem.Models.BPSMainAtt
     [NotMapped]
     public partial class AppSettings : INotifyPropertyChanged
     {
-        #region private static readonly log4net.ILog log4net
+        #region private readonly log4net.ILog log4net
         /// <summary>
         /// Log4 Net Logger
         /// </summary>

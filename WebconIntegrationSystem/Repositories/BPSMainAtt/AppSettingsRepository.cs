@@ -1,16 +1,15 @@
-﻿using System;
+using System;
 using System.Reflection;
 using System.Threading.Tasks;
 using NetAppCommon;
 using WebconIntegrationSystem.Models.BPSMainAtt;
 using WebconIntegrationSystem.Repositories.BPSMainAtt.Interface;
 
-
 namespace WebconIntegrationSystem.Repositories.BPSMainAtt
 {
     public class AppSettingsRepository : IAppSettingsRepository
     {
-        #region private static readonly log4net.ILog log4net
+        #region private readonly log4net.ILog log4net
         /// <summary>
         /// Log4net Logger
         /// Log4net Logger

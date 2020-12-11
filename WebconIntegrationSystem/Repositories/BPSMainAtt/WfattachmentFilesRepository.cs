@@ -42,12 +42,12 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
             }
         }
 
-        #region private static readonly log4net.ILog log4net
+        #region private readonly log4net.ILog log4net
         /// <summary>
         /// Log4net Logger
         /// Log4net Logger
         /// </summary>
-        private readonly log4net.ILog _log4net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod().DeclaringType);
+        private readonly log4net.ILog log4net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod().DeclaringType);
         #endregion
 
         #region private readonly BPSMainAttDbContext _context
@@ -86,7 +86,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
             }
             catch (Exception e)
             {
-                _log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
+                log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
             }
             return WfattachmentFiles;
         }
@@ -99,7 +99,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
             }
             catch (Exception e)
             {
-                _log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", _context.Database.GetDbConnection().ConnectionString, e.InnerException?.GetType(), e.Message, e.StackTrace), e);
+                log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", _context.Database.GetDbConnection().ConnectionString, e.InnerException?.GetType(), e.Message, e.StackTrace), e);
             }
             return WfattachmentFiles;
         }
@@ -114,7 +114,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
             }
             catch (Exception e)
             {
-                _log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
+                log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
             }
             return WfattachmentFiles;
         }
@@ -129,7 +129,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
             }
             catch (Exception e)
             {
-                _log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
+                log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
             }
             return WfattachmentFiles;
         }
