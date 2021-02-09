@@ -14,7 +14,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
         /// Log4net Logger
         /// Log4net Logger
         /// </summary>
-        private static readonly log4net.ILog Log4net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Log4net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod()?.DeclaringType);
         #endregion
 
         //#region protected Data.IUIntegrationSystemDataDbContext context...
@@ -49,12 +49,12 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
         {
             try
             {
-                Configuration.SaveConfigurationToFile(appSettings, appSettings.GetFilePath());
+                Configuration.SaveToFile(appSettings, appSettings.GetFilePath());
                 return true;
             }
             catch (Exception e)
             {
-                Log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
+                Log4net.Error($"\n{e.GetType()}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
             }
             return false;
         }
@@ -65,7 +65,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
             {
                 return await Task.Run(async () =>
                 {
-                    await Configuration.SaveConfigurationToFileAsync(appSettings, appSettings.GetFilePath());
+                    await Configuration.SaveToFileAsync(appSettings, appSettings.GetFilePath());
                     return true;
                 });
             }

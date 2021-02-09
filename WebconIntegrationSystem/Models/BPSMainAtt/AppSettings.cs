@@ -12,8 +12,8 @@ namespace WebconIntegrationSystem.Models.BPSMainAtt
 {
     #region public partial class AppSettings
     /// <summary>
-    /// Klasa modelu ustawień aplikacji ErpSerwis.Core.Models
-    /// The settings model class of the ErpSerwis.Core.Models
+    /// Klasa modelu ustawień aplikacji
+    /// The settings model class of the
     /// </summary>
     [NotMapped]
     public partial class AppSettings : INotifyPropertyChanged
@@ -22,7 +22,7 @@ namespace WebconIntegrationSystem.Models.BPSMainAtt
         /// <summary>
         /// Log4 Net Logger
         /// </summary>
-        private static readonly log4net.ILog Log4net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod().DeclaringType);
+        private static readonly log4net.ILog Log4net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod()?.DeclaringType);
         #endregion
 
         #region private static readonly string FileName
@@ -105,43 +105,43 @@ namespace WebconIntegrationSystem.Models.BPSMainAtt
             }
             catch (Exception e)
             {
-                Log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
+                Log4net.Error($"\n{e.GetType()}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
             }
             try
             {
-                ConnectionString = Configuration.GetValue<string>(_filePath, string.Format("{0}:{1}", "ConnectionStrings", ConnectionStringName)) ?? @"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=%Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)%\ErpSerwisMSSQLLocalDB\ErpSerwisMSSQLLocalDB.mdf; Database=%AttachDbFilename%; MultipleActiveResultSets=true; Integrated Security=True; Trusted_Connection=Yes";
+                ConnectionString = Configuration.GetValue<string>(_filePath, string.Format("{0}:{1}", "ConnectionStrings", ConnectionStringName)) ?? @"Data Source=(LocalDB)\MSSQLLocalDB; AttachDbFilename=%Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)%\ErpSerwisMSSQLLocalDB\ErpSerwisMSSQLLocalDB.mdf; Database=%AttachDbFilename%; MultipleActiveResultSets=true; Integrated Security=SSPI; Trusted_Connection=Yes";
             }
             catch (Exception e)
             {
-                Log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
+                Log4net.Error($"\n{e.GetType()}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
             }
         }
         #endregion
 
-        #region private bool _cheskForConnection { get; set; }
+        #region private bool _checkForConnection { get; set; }
         /// <summary>
         /// Sprawdź możliwość podłączenia do bazy danych\nz wpisanego parametru Ciąg połączenia do bazy danych Mssql
         /// Check the possibility of connecting to the database by entering the Mssql database connection string parameter
         /// </summary>
-        private bool _cheskForConnection { get; set; }
+        private bool _checkForConnection { get; set; }
         #endregion
 
-        #region public bool CheskForConnection { get; set; }
+        #region public bool CheckForConnection { get; set; }
         /// <summary>
         /// Sprawdź możliwość podłączenia do bazy danych\nz wpisanego parametru Ciąg połączenia do bazy danych Mssql
         /// Check the possibility of connecting to the database by entering the Mssql database connection string parameter
         /// </summary>
         [JsonIgnore]
         [Display(Name = "Sprawdź możliwość podłączenia do bazy danych\nz wpisanego parametru Ciąg połączenia do bazy danych Mssql", Prompt = "Zaznacz, jeśli chcesz sprawdzić możliwość podłączenia do bazy danych z wpisanego parametru Ciąg połączenia do bazy danych Mssql", Description = "Sprawdź możliwość podłączenia do bazy danych\nz wpisanego parametru Ciąg połączenia do bazy danych Mssql")]
-        public bool CheskForConnection
+        public bool CheckForConnection
         {
-            get => _cheskForConnection;
+            get => _checkForConnection;
             set
             {
-                if (value != _cheskForConnection)
+                if (value != _checkForConnection)
                 {
-                    _cheskForConnection = value;
-                    OnPropertyChanged(nameof(CheskForConnection));
+                    _checkForConnection = value;
+                    OnPropertyChanged(nameof(CheckForConnection));
                 }
             }
         }
@@ -208,7 +208,7 @@ namespace WebconIntegrationSystem.Models.BPSMainAtt
             }
             catch (Exception e)
             {
-                Log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", e.GetType(), e.InnerException?.GetType(), e.Message, e.StackTrace), e);
+                Log4net.Error($"\n{e.GetType()}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
             }
             return null;
         }
