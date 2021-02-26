@@ -13,9 +13,9 @@ namespace WebconIntegrationSystem.Data.BPSMainAttDbContext
     /// </summary>
     public partial class BPSMainAttDbContext : DbContext
     {
-        #region Log4 Net Logger
+        #region private readonly ILog _log4Net
         /// <summary>
-        /// Log4 Net Logger
+        /// private readonly ILog _log4Net
         /// </summary>
         private static readonly log4net.ILog Log4net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod()?.DeclaringType);
         #endregion
