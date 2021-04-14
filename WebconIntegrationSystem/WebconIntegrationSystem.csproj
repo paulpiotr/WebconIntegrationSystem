@@ -8,11 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
-    <Folder Include="Views\" />
     <Folder Include="Properties\" />
-    <Folder Include="Resources\" />
-    <Folder Include="ViewModels\" />
   </ItemGroup>
 
   <ItemGroup>

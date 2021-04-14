@@ -10,7 +10,7 @@ using WebconIntegrationSystem.Repositories.BPSMainAtt.Interface;
 
 namespace WebconIntegrationSystem.Repositories.BPSMainAtt
 {
-    public class WfattachmentFilesRepository : /*MvxViewModel, */IWfattachmentFilesRepository, INotifyPropertyChanged
+    public class WfattachmentFilesRepository : IWfattachmentFilesRepository, INotifyPropertyChanged
     {
         private IEnumerable<WfattachmentFiles> _ieEnumerableWfattachmentFiles;
 
@@ -47,7 +47,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
         /// Log4net Logger
         /// Log4net Logger
         /// </summary>
-        private readonly log4net.ILog log4net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod()?.DeclaringType);
+        private readonly log4net.ILog _log4Net = Log4netLogger.Log4netLogger.GetLog4netInstance(MethodBase.GetCurrentMethod()?.DeclaringType);
         #endregion
 
         #region private readonly BPSMainAttDbContext _context
@@ -70,12 +70,12 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
 
         public static WfattachmentFilesRepository GetInstance()
         {
-            return new WfattachmentFilesRepository();
+            return new();
         }
 
         public static WfattachmentFilesRepository GetInstance(BPSMainAttDbContext context)
         {
-            return new WfattachmentFilesRepository(context);
+            return new(context);
         }
 
         public WfattachmentFiles FindByAtfId(int atfId)
@@ -86,7 +86,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
             }
             catch (Exception e)
             {
-                log4net.Error($"\n{e.GetType()}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
+                _log4Net.Error($"\n{e.GetType()}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
             }
             return WfattachmentFiles;
         }
@@ -99,7 +99,8 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
             }
             catch (Exception e)
             {
-                log4net.Error(string.Format("\n{0}\n{1}\n{2}\n{3}\n", _context.Database.GetDbConnection().ConnectionString, e.InnerException?.GetType(), e.Message, e.StackTrace), e);
+                _log4Net.Error(
+                    $"\n{_context.Database.GetDbConnection().ConnectionString}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
             }
             return WfattachmentFiles;
         }
@@ -114,7 +115,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
             }
             catch (Exception e)
             {
-                log4net.Error($"\n{e.GetType()}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
+                _log4Net.Error($"\n{e.GetType()}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
             }
             return WfattachmentFiles;
         }
@@ -129,7 +130,7 @@ namespace WebconIntegrationSystem.Repositories.BPSMainAtt
             }
             catch (Exception e)
             {
-                log4net.Error($"\n{e.GetType()}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
+                _log4Net.Error($"\n{e.GetType()}\n{e.InnerException?.GetType()}\n{e.Message}\n{e.StackTrace}\n", e);
             }
             return WfattachmentFiles;
         }
